@@ -6,14 +6,12 @@ N = 1_000_000
 MAX_VAL = 65536  # 2^16
 data = [random.randint(0, MAX_VAL - 1) for _ in range(N)]
 
-# --- Python built-in sorted() ---
 arr = data.copy()
 t0 = time.perf_counter()
 result_builtin = sorted(arr)
 t1 = time.perf_counter()
 time_builtin = t1 - t0
 
-# --- Counting Sort ---
 def counting_sort(arr, k):
     C = [0] * (k + 1)
     for x in arr:
@@ -32,7 +30,6 @@ result_counting = counting_sort(arr, MAX_VAL - 1)
 t1 = time.perf_counter()
 time_counting = t1 - t0
 
-# --- Radix Sort (LSD, r=8, 2 passes for 16-bit) ---
 def counting_sort_digit(arr, exp):
     n = len(arr)
     output = [0] * n
@@ -59,7 +56,6 @@ result_radix = radix_sort(arr)
 t1 = time.perf_counter()
 time_radix = t1 - t0
 
-# Verify correctness
 assert result_builtin == result_counting, "Counting Sort incorrect!"
 assert result_builtin == result_radix, "Radix Sort incorrect!"
 
